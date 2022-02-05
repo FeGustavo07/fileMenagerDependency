@@ -6,16 +6,27 @@ import java.util.ArrayList;
 
 public class FileWriter {
 
-    public void writeLine(ArrayList<String[]> table, String fileName){
-        for (String[] matches : table) {
-            for (String match : matches) {
-                try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(fileName, true))) {
-                    printWriter.print(match + "\n");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    public void writeChampionshipStandings(String data, String fileName, String dirPath){
+            new File(dirPath).mkdir();
+            try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(fileName, true))) {
+                printWriter.print(data + "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-    }
 
+    public void writeSeparateTeams(ArrayList<String> message, String fileName, String dirPath){
+        new File(dirPath).mkdir();
+        try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(fileName, true))) {
+            for ( String row : message) {
+                printWriter.print(row + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
+
