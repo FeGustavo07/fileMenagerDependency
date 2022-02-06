@@ -29,7 +29,7 @@ public class FileReader {
 
     public <T> ArrayList<T> readFileWithTemplate(T template, String uri){
         Class<?> templateClass = template.getClass();
-        Field[] fields = templateClass.getFields();
+
         Object newObject;
 
         ArrayList<T> objectsOfLines = new ArrayList<>();
@@ -38,9 +38,11 @@ public class FileReader {
 
         try {
             Constructor<?> construct = templateClass.getConstructor();
-
             for (String[] line : lines) {
+
                 newObject =  construct.newInstance();
+                Field[] fields = newObject.getClass().getFields();
+
                 for (int index = 0; index < line.length && index < fields.length; index++) {
                         fields[index].setAccessible(true);
                         fields[index].set(newObject , line[index]);
