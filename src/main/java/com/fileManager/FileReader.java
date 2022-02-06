@@ -43,11 +43,12 @@ public class FileReader {
                 newObject =  construct.newInstance();
                 Field[] fields = newObject.getClass().getFields();
 
-                for (int index = 0; index < line.length && index < fields.length; index++) {
+                for (int index = 0; index < fields.length || index < line.length; index++) {
                         fields[index].setAccessible(true);
                         fields[index].set(newObject , line[index]);
-                        objectsOfLines.add((T) newObject);
+
                 }
+                objectsOfLines.add((T) newObject);
             }
         } catch (NoSuchMethodException | IllegalAccessException |
                 InstantiationException | InvocationTargetException e) {
