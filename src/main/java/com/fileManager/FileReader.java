@@ -41,9 +41,9 @@ public class FileReader {
             for (String[] line : lines) {
 
                 newObject =  construct.newInstance();
-                Field[] fields = newObject.getClass().getFields();
+                Field[] fields = newObject.getClass().getDeclaredFields();
 
-                for (int index = 0; index < fields.length || index < line.length; index++) {
+                for (int index = 0; index < fields.length && index < line.length; index++) {
                         fields[index].setAccessible(true);
                         fields[index].set(newObject , line[index]);
 
